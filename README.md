@@ -16,12 +16,13 @@ So here we are: a remote control for your PC's video player, accessible from you
 
 ### Current
 - Play/pause video playback
+- Skip forward/backward (10 seconds)
 - Works with YouTube, Netflix, Crunchyroll, Prime Video, Disney+, and more
 - No window focus stealing - your video stays front and center
 - Real-time WebSocket communication for instant response
+- Browser extension for Edge, Chrome, Opera, and Firefox
 
 ### Planned
-- Skip forward/backward (10 seconds)
 - Volume control
 - Multi-device support (control multiple PCs from one phone)
 - Speed control (playback rate adjustment)
@@ -30,11 +31,11 @@ So here we are: a remote control for your PC's video player, accessible from you
 
 ## Project Status
 
-**Work in Progress - Backend complete, extension and mobile app coming soon**
+**✅ MVP Complete - All core components ready!**
 
 - [x] Backend WebSocket server
-- [ ] Browser extension
-- [ ] Mobile PWA
+- [x] Browser extension (Edge, Chrome, Opera, Firefox)
+- [x] Mobile PWA (Progressive Web App)
 - [ ] Multi-device support
 - [ ] Advanced controls
 
@@ -60,16 +61,20 @@ Phone Video Remote consists of three components that work together:
    - Broadcasts commands between devices
    - [See backend README](./backend/README.md)
 
-2. **Browser Extension** (Coming Soon)
+2. **Browser Extension** ✅
    - Listens for commands from the backend
    - Controls video playback on streaming sites
    - Works in the background without stealing focus
+   - Supports Edge, Chrome, Opera, and Firefox
+   - [See extension README](./extension/README.md)
 
-3. **Mobile App (PWA)** (Coming Soon)
-   - Touch-friendly interface
-   - Connects to your PC's backend
-   - Sends playback commands
-   - Works on any phone with a modern browser
+3. **Mobile App (PWA)** ✅
+   - Touch-friendly interface optimized for phones
+   - Connects to your PC's backend via WebSocket
+   - Sends playback commands (play, pause, skip)
+   - Installable on home screen (app-like experience)
+   - Works offline, dark theme, haptic feedback
+   - [See mobile app README](./mobile-app/README.md)
 
 ## Architecture Details
 
@@ -89,39 +94,122 @@ The system uses WebSocket connections for real-time, bidirectional communication
 ### Prerequisites
 
 - Node.js 14.0.0 or higher
-- A modern browser (Chrome, Edge, or any Chromium-based browser)
-- A smartphone with a modern browser
+- A supported browser:
+  - Microsoft Edge
+  - Google Chrome
+  - Opera
+  - Mozilla Firefox
+- A smartphone with a modern browser (for future mobile app)
 
 ### Quick Start
 
-Detailed installation instructions coming soon! For now, you can set up the backend:
-
-1. Clone this repository:
+1. **Clone this repository:**
    ```bash
-   git clone https://github.com/yourusername/phone-video-remote.git
+   git clone https://github.com/LilianSonzogni/phone-video-remote.git
    cd phone-video-remote
    ```
 
-2. Set up the backend:
+2. **Set up and start the backend:**
    ```bash
    cd backend
    npm install
    npm start
    ```
 
-3. The server will start on `http://localhost:8080`
+   The server will start on `ws://localhost:8080`
 
-More detailed instructions for the extension and mobile app will be added as those components are developed.
+3. **Install the browser extension:**
+
+   **For Chrome/Edge/Opera:**
+   - Open `chrome://extensions` (or `edge://extensions`)
+   - Enable "Developer mode"
+   - Click "Load unpacked"
+   - Select the `/extension` folder from this project
+
+   **For Firefox:**
+   - Open `about:debugging#/runtime/this-firefox`
+   - Click "Load Temporary Add-on..."
+   - Select `manifest.json` from the `/extension` folder
+
+   📖 [Detailed extension installation guide](./extension/README.md)
+
+4. **Verify the connection:**
+   - Click the extension icon in your browser toolbar
+   - You should see "Connected ✅"
+   - If disconnected, ensure the backend server is running
+
+5. **Set up the mobile app:**
+
+   **Start a development server** (one-time setup):
+   ```bash
+   cd mobile-app
+   npx http-server -p 3000
+   ```
+
+   **On your phone**, install the PWA:
+   - **Android**: Navigate to `http://YOUR_PC_IP:3000`, tap "Install" when prompted
+   - **iOS**: Navigate to `http://YOUR_PC_IP:3000`, tap Share → "Add to Home Screen"
+
+   📖 [Detailed mobile app installation guide](./mobile-app/README.md)
+
+6. **Connect and control:**
+   - Open the PWA on your phone
+   - Enter server address: `ws://YOUR_PC_IP:8080`
+   - Tap "Connect"
+   - Open a video site (YouTube, Netflix, etc.)
+   - Control from your phone!
+
+## Complete Usage Workflow
+
+Once everything is set up, here's your daily routine:
+
+### On Your PC:
+1. Start the backend server:
+   ```bash
+   cd backend
+   npm start
+   ```
+
+2. Start the mobile app server (if not permanent):
+   ```bash
+   cd mobile-app
+   npx http-server -p 3000
+   ```
+
+3. Open your browser with the extension installed
+4. Navigate to any supported video site
+5. Start watching!
+
+### On Your Phone:
+1. Open the Phone Video Remote app (from home screen)
+2. Tap "Connect" (server address is remembered)
+3. Control your videos with large, touch-friendly buttons
+4. Enjoy not having to get up! 🎉
+
+### Supported Video Sites:
+- ✅ **YouTube** - Full support (direct video control)
+- ✅ **Netflix** - Full support (direct video control)
+- ✅ **Crunchyroll** - Full support (keyboard events with video focus)
+- ✅ **Amazon Prime Video** - Full support (ghost filtering + command throttling)
+- ✅ **Disney+** - Full support (keyboard events with video focus)
+
+Want to add more? Edit `extension/manifest.json` and add the site URL!
+
+### Notes
+
+- **Icons** - Placeholder icons are included. See `/extension/icons/` and `/mobile-app/icons/` for customization
+- **Same Network** - Phone and PC must be on the same WiFi
+- **Firewall** - Make sure ports 8080 and 3000 are allowed
 
 ## Development Roadmap
 
-### Phase 1: MVP (Current)
+### Phase 1: MVP ✅ COMPLETE
 - [x] Backend server with WebSocket support
-- [ ] Basic browser extension with play/pause
-- [ ] Simple mobile web interface
+- [x] Browser extension with play/pause/skip controls
+- [x] Mobile PWA with touch-friendly interface
 
 ### Phase 2: Enhanced Controls
-- [ ] Skip forward/backward
+- [x] Skip forward/backward (10 seconds)
 - [ ] Volume control
 - [ ] Speed adjustment
 - [ ] Better mobile UI/UX
@@ -144,7 +232,7 @@ This is an open-source project, and contributions are welcome! Here's how you ca
 
 ### Ways to Contribute
 
-- **Report Bugs**: Found something broken? [Open an issue](https://github.com/yourusername/phone-video-remote/issues)
+- **Report Bugs**: Found something broken? [Open an issue](https://github.com/LilianSonzogni/phone-video-remote/issues)
 - **Suggest Features**: Have ideas for improvements? We'd love to hear them!
 - **Submit Pull Requests**: Code contributions are always appreciated
 - **Improve Documentation**: Help make the docs clearer and more comprehensive
@@ -171,8 +259,11 @@ This is an open-source project, and contributions are welcome! Here's how you ca
 ## Technical Stack
 
 - **Backend**: Node.js, Express, WebSocket (ws library)
-- **Extension**: Vanilla JavaScript, Chrome Extension API
-- **Mobile**: Progressive Web App (HTML5, CSS3, JavaScript)
+- **Extension**: Vanilla JavaScript, Chrome Extension API (Manifest V3)
+- **Mobile**: Progressive Web App (PWA) - Vanilla HTML5, CSS3, JavaScript
+  - Service Worker for offline functionality
+  - Web App Manifest for installation
+  - localStorage for settings persistence
 
 ## License
 
@@ -191,8 +282,10 @@ See the [LICENSE](./LICENSE) file for details.
 Having trouble? Here are some resources:
 
 - Check the [backend documentation](./backend/README.md)
-- Search [existing issues](https://github.com/yourusername/phone-video-remote/issues)
-- Open a [new issue](https://github.com/yourusername/phone-video-remote/issues/new)
+- Check the [extension documentation](./extension/README.md)
+- Check the [mobile app documentation](./mobile-app/README.md)
+- Search [existing issues](https://github.com/LilianSonzogni/phone-video-remote/issues)
+- Open a [new issue](https://github.com/LilianSonzogni/phone-video-remote/issues/new)
 
 ## Acknowledgments
 
@@ -204,4 +297,4 @@ This project is for personal use. Please respect the terms of service of streami
 
 ---
 
-Made with coffee and excessive comfort by [Lilian Sonzogni](https://github.com/yourusername)
+Made with coffee and excessive comfort by [Lilian Sonzogni](https://github.com/LilianSonzogni)

@@ -1,0 +1,43 @@
+{
+  "name": "Phone Video Remote",
+  "short_name": "Video Remote",
+  "description": "Control video playback on your PC from your phone - the ultimate couch potato remote",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#667eea",
+  "background_color": "#1a1a2e",
+  "categories": ["utilities", "productivity", "entertainment"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Play/Pause",
+      "short_name": "Play",
+      "description": "Toggle video playback",
+      "url": "/?action=play",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "lang": "en-US",
+  "dir": "ltr"
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="description" content="Control video playback on your PC from your phone - the ultimate couch potato remote">
+
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#667eea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Video Remote">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.json">
+
+  <title>Phone Video Remote</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo">
+        <h1>📱 Video Remote</h1>
+        <p class="tagline">Control your PC videos</p>
+      </div>
+    </header>
+
+    <!-- Connection Section -->
+    <section class="connection-section">
+      <div class="status-card">
+        <div class="status-header">
+          <span class="status-label">Status</span>
+          <div class="status-indicator">
+            <span class="status-dot" id="statusDot"></span>
+            <span class="status-text" id="statusText">Disconnected</span>
+          </div>
+        </div>
+
+        <div class="server-input-group">
+          <label for="serverAddress">Server Address</label>
+          <input
+            type="text"
+            id="serverAddress"
+            placeholder="ws://192.168.1.100:8080"
+            autocomplete="off"
+            autocapitalize="off"
+            autocorrect="off"
+            spellcheck="false"
+          >
+          <small class="input-hint">Use your PC's IP address (not localhost)</small>
+        </div>
+
+        <div class="connection-buttons">
+          <button id="connectBtn" class="btn btn-connect">Connect</button>
+          <button id="disconnectBtn" class="btn btn-disconnect" disabled>Disconnect</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Control Section -->
+    <section class="controls-section">
+      <h2 class="section-title">Playback Controls</h2>
+
+      <!-- Play/Pause Toggle -->
+      <button id="playPauseBtn" class="btn-control btn-primary" disabled>
+        <span class="btn-icon">▶️</span>
+        <span class="btn-label">Play</span>
+      </button>
+
+      <!-- Skip Buttons -->
+      <div class="skip-buttons">
+        <button id="skipBackwardBtn" class="btn-control btn-secondary" disabled>
+          <span class="btn-icon">⏪</span>
+          <span class="btn-label">-10s</span>
+        </button>
+
+        <button id="skipForwardBtn" class="btn-control btn-secondary" disabled>
+          <span class="btn-icon">⏩</span>
+          <span class="btn-label">+10s</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Help Section -->
+    <section class="help-section">
+      <details class="help-accordion">
+        <summary>Need help?</summary>
+        <div class="help-content">
+          <h3>Quick Start:</h3>
+          <ol>
+            <li>Start backend server on your PC</li>
+            <li>Find your PC's IP address (ipconfig on Windows)</li>
+            <li>Enter the IP in the format: <code>ws://192.168.1.X:8080</code></li>
+            <li>Click Connect</li>
+            <li>Control your videos!</li>
+          </ol>
+          <p class="help-note">
+            <strong>Note:</strong> Your phone and PC must be on the same WiFi network.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Made with ❤️ for couch potatoes</p>
+      <a href="https://github.com/LilianSonzogni/phone-video-remote" target="_blank" rel="noopener">
+        View on GitHub
+      </a>
+    </footer>
+  </div>
+
+  <!-- Install Prompt (shown when PWA can be installed) -->
+  <div id="installPrompt" class="install-prompt" hidden>
+    <div class="install-content">
+      <p>📲 Install this app for quick access!</p>
+      <div class="install-buttons">
+        <button id="installBtn" class="btn btn-install">Install</button>
+        <button id="dismissInstallBtn" class="btn btn-text">Not now</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
